@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rank Links by Prompt</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .links-list {
+            margin-top: 20px;
+        }
+        .links-list a {
+            text-decoration: none;
+            color: #007bff;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .links-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Enter Your Prompt</h1>
+                <form action="/rank_links" method="post">
+                    <div class="form-group">
+                        <label for="prompt">Prompt:</label>
+                        <input type="text" id="prompt" name="prompt" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+                {% if links %}
+                    <h2 class="mt-5">Ranked Links</h2>
+                    <div class="links-list">
+                        <ol>
+                            {% set counter = 1 %}
+                            {% for link in links %}
+                                <li><a href="{{ link }}" target="_blank">{{ counter }}. {{ link }}</a></li>
+                                {% set counter = counter + 1 %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
